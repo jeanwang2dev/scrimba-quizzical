@@ -1,11 +1,19 @@
-import Button from './components/Button'
+import { useState } from 'react'
+
+import Start from './components/Start'
+import Questions from './components/Questions'
 
 const App = () => {
+    const [isStart, setIsStart] = useState(false)
+
+    function startQuiz(){
+        console.log('start...')
+        setIsStart(true)
+    }      
+
     return (
         <main className="max-w-5xl mx-auto text-center py-52">
-            <h1 className="font-karla font-bold text-3xl mb-2">Quizzical</h1>
-            <p className="font-inter font-medium text-base mb-6">Some description if needed</p>
-            <Button btn_text="Start quiz" />
+            { !isStart ? <Start startQuiz={startQuiz}/> : <Questions />}
         </main>
     )
 }
