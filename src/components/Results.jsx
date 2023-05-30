@@ -1,6 +1,6 @@
 import Button from './Button'
 
-function Answers(props) {
+function Results(props) {
 
     return (
         <>
@@ -11,4 +11,4 @@ function Answers(props) {
 
 }
 
-export default Answers
+export default Results

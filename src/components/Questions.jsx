@@ -8,19 +8,19 @@ function Questions(props) {
     if(props.questions.loading) {
         loadingText = "Loading"
     } else {
-        console.log('here', props.questions.data)
         questions = props.questions.data.map( item => {
             return (
                 <Question
                     key={item.question}
                     question={item.question}
+                    answers={item.answers}
                 />
             )
         })
     }
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center space-y-6">
             { loadingText && <p>{loadingText}</p>}
             { !props.questions.loading && questions }
             <Button btn_action={props.checkAnswers}  btn_text="Check answers" /> 
