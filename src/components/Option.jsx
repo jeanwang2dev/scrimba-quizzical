@@ -7,7 +7,7 @@ function Option(props) {
         <span 
             id={props.id} 
             onClick={()=> props.userAnswer(props.questionIdx, props.id)} 
-            className={`answer-btn ${props.isChecked ? "bg-tertiary border-0": ""}`} >{decode(props.answerChoice)}</span>
+            className={`option-btn ${props.isChecked ? "bg-tertiary border-0": ""}`} >{decode(props.answerChoice)}</span>
     )
 
 }

@@ -62,7 +62,7 @@ const App = () => {
     }
 
     function answer(questionIdx, answerIdx) {
-        console.log('user is answering: ' + questionIdx + " " + answerIdx)
+        // console.log('user is answering: ' + questionIdx + " " + answerIdx)
         setQuestions(prevQuestions => {
             const updatedData = prevQuestions.data.map( (item, index) => {
                 if( index === questionIdx) {                    
@@ -83,7 +83,6 @@ const App = () => {
                     ...item
                 }
             })
-            // console.log(updatedData)
             return {
                 ...prevQuestions,
                 data: updatedData
@@ -91,18 +90,22 @@ const App = () => {
         })
     }
     
-    // useEffect( () => {
-    //     if(questions.data && questions.data[0].userAnswerIdx){
-    //         console.log('update questions', questions.data[0].userAnswerIdx)
-    //     }
-    // }, [questions] )
+    useEffect( () => {
+        // if(questions.data && questions.data[0].userAnswerIdx){
+        //     console.log('update questions', questions.data[0].userAnswerIdx)
+        // }
+        console.log(questions)
+    }, [questions] )
 
     function checkAnswers(){
         console.log('check answers...')
         setQuizState(prevQuizState => ({
             ...quizState,
-            isAnswered: true
+            isAnswered: true,
+            isChecked: true
         }))
+
+        // check if all the question are anwsered
     }
 
     function restartQuiz(){
@@ -116,9 +119,14 @@ const App = () => {
 
     return (
         <main className="max-w-5xl mx-auto text-center py-52">
-            { !quizState.isStart && <Start startQuiz={startQuiz}/> }
-            { quizState.isStart && !quizState.isAnswered && <Questions answerAction={answer} questions={questions} checkAnswers={checkAnswers} />}
-            { quizState.isStart && quizState.isAnswered && <Results restartQuiz={restartQuiz}/>}
+            { !quizState.isStart && 
+              <Start startQuiz={startQuiz}/> }
+            { quizState.isStart && 
+                !quizState.isAnswered && 
+                <Questions answerAction={answer} questions={questions} checkAnswers={checkAnswers} />}
+            { quizState.isStart && 
+                quizState.isAnswered && 
+                <Results restartQuiz={restartQuiz} questions={questions} />}
         </main>
     )
 }

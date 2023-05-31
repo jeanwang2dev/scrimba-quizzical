@@ -16,6 +16,7 @@ function Questions(props) {
                     question={item.question}
                     options={item.options}
                     answerAction={props.answerAction}
+                    isCheckedMode={false}
                 />
             )
         })
