@@ -3,7 +3,7 @@ import Option from './Option'
 
 function Question(props){
 
-    const options = props.answers.map( (item,key) => {
+    const options = props.options.map( (item,key) => {
         return (
             <Option 
                 key={key}  

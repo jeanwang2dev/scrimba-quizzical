@@ -23,22 +23,26 @@ const App = () => {
                 loading: false,
                 data: data.results.map( (item, index ) =>{
 
-                    const answers = item.incorrect_answers
-                    answers.push(item.correct_answer)
-                    shuffleArray(answers)
+                    const options = item.incorrect_answers
+                    options.push(item.correct_answer)
+                    shuffleArray(options)
 
-                    const newOptions = answers.map( option => {
+                    const optionsWithState = options.map( option => {
                         return {
                             option: option,
                             isChecked: false
                         }
                     })
 
+                    const correctAnswerIdx = optionsWithState.findIndex( itemOption =>  {
+                        return itemOption.option.normalize() === item.correct_answer.normalize()
+                    })
+
                     return { 
                         question: item.question,
                         questionIdx: index,
-                        answers: newOptions,
-                        correctAnswer: item.correct_answer,
+                        options: optionsWithState,
+                        correctAnswerIdx: correctAnswerIdx,
                         userAnswerIdx: -1 
                     }
                 })
@@ -62,24 +66,34 @@ const App = () => {
         setQuestions(prevQuestions => {
             const updatedData = prevQuestions.data.map( (item, index) => {
                 if( index === questionIdx) {
-                    item.answers.map( (option, oIdx) => {
+                    item.userAnswerIdx = answerIdx
+                    item.options.map( (option, oIdx) => {
                         if( oIdx === answerIdx) {
-                           return option.isChecked = !option.isChecked
+                            option.isChecked = !option.isChecked
+                        } else {
+                            option.isChecked = false
                         }
+                        return {
+                            ...option
+                        }
+
                     })
+                }
+                return {
+                    ...item
                 }
             })
             // console.log(updatedData)
             return {
                 ...prevQuestions,
-                // data: prevQuestions.data
+                data: updatedData
             }
         })
     }
     
-    useEffect( () => {
-        console.log('update questions', questions)
-    }, [questions] )
+    // useEffect( () => {
+    //     console.log('update questions', questions)
+    // }, [questions] )
 
     function checkAnswers(){
         console.log('check answers...')

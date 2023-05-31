@@ -14,9 +14,8 @@ function Questions(props) {
                     key={item.questionIdx}
                     questionIdx={item.questionIdx}
                     question={item.question}
-                    answers={item.answers}
+                    options={item.options}
                     answerAction={props.answerAction}
-                    isAnswered={false}
                 />
             )
         })
