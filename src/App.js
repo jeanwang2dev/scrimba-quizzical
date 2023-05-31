@@ -91,11 +91,11 @@ const App = () => {
         })
     }
     
-    useEffect( () => {
-        if(questions.data && questions.data[0].userAnswerIdx){
-            console.log('update questions', questions.data[0].userAnswerIdx)
-        }
-    }, [questions] )
+    // useEffect( () => {
+    //     if(questions.data && questions.data[0].userAnswerIdx){
+    //         console.log('update questions', questions.data[0].userAnswerIdx)
+    //     }
+    // }, [questions] )
 
     function checkAnswers(){
         console.log('check answers...')
