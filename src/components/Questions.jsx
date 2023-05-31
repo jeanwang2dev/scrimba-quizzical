@@ -11,9 +11,12 @@ function Questions(props) {
         questions = props.questions.data.map( item => {
             return (
                 <Question
-                    key={item.question}
+                    key={item.questionIdx}
+                    questionIdx={item.questionIdx}
                     question={item.question}
                     answers={item.answers}
+                    answerAction={props.answerAction}
+                    isAnswered={false}
                 />
             )
         })
@@ -23,7 +26,7 @@ function Questions(props) {
         <div className="flex flex-col items-center space-y-6">
             { loadingText && <p>{loadingText}</p>}
             { !props.questions.loading && questions }
-            <Button btn_action={props.checkAnswers}  btn_text="Check answers" /> 
+            <Button btnAction={props.checkAnswers}  btnText="Check answers" /> 
         </div>
     )
 

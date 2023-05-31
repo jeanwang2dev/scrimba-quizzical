@@ -6,7 +6,7 @@ function Start(props) {
         <>
         <h1 className="font-karla font-bold text-3xl mb-2">Quizzical</h1>
         <p className="font-inter font-medium text-base mb-6">Some description if needed</p>
-        <Button btn_action={props.startQuiz} btn_text="Start quiz" /> 
+        <Button btnAction={props.startQuiz} btnText="Start quiz" /> 
         </>
     )
 

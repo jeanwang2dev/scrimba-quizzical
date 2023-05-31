@@ -21,14 +21,25 @@ const App = () => {
                 //console.log(data)
                 setQuestions({
                 loading: false,
-                data: data.results.map( item =>{
+                data: data.results.map( (item, index ) =>{
+
                     const answers = item.incorrect_answers
                     answers.push(item.correct_answer)
                     shuffleArray(answers)
+
+                    const newOptions = answers.map( option => {
+                        return {
+                            option: option,
+                            isChecked: false
+                        }
+                    })
+
                     return { 
                         question: item.question,
-                        answers: answers,
-                        correct_answer: item.correct_answer
+                        questionIdx: index,
+                        answers: newOptions,
+                        correctAnswer: item.correct_answer,
+                        userAnswerIdx: -1 
                     }
                 })
             })})
@@ -44,6 +55,26 @@ const App = () => {
             array[i] = array[j];
             array[j] = temp;
         }
+    }
+
+    function answer(questionIdx, answerIdx) {
+        console.log('user is answering: ' + questionIdx + " " + answerIdx)
+        setQuestions(prevQuestions => {
+            const updatedData = prevQuestions.data.map( (item, index) => {
+                if( index === questionIdx) {
+                    item.answers.map( (option, oIdx) => {
+                        if( oIdx === answerIdx) {
+                           return option.isChecked = !option.isChecked
+                        }
+                    })
+                }
+            })
+            // console.log(updatedData)
+            return {
+                ...prevQuestions,
+                // data: prevQuestions.data
+            }
+        })
     }
     
     useEffect( () => {
@@ -70,7 +101,7 @@ const App = () => {
     return (
         <main className="max-w-5xl mx-auto text-center py-52">
             { !quizState.isStart && <Start startQuiz={startQuiz}/> }
-            { quizState.isStart && !quizState.isAnswered && <Questions questions={questions} checkAnswers={checkAnswers} />}
+            { quizState.isStart && !quizState.isAnswered && <Questions answerAction={answer} questions={questions} checkAnswers={checkAnswers} />}
             { quizState.isStart && quizState.isAnswered && <Results restartQuiz={restartQuiz}/>}
         </main>
     )

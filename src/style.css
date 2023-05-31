@@ -18,3 +18,10 @@
         background-position: top right, left bottom ;
     }
 }
+
+@layer components {
+
+    .answer-btn {
+        @apply transition px-3 py-1 border border-secondary rounded-xl mb-4 text-[10.24px] font-inter font-medium hover:bg-tertiary hover:text-primary hover:border-0 hover:cursor-pointer;
+    }
+}
