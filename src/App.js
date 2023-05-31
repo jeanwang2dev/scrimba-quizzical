@@ -65,8 +65,7 @@ const App = () => {
         console.log('user is answering: ' + questionIdx + " " + answerIdx)
         setQuestions(prevQuestions => {
             const updatedData = prevQuestions.data.map( (item, index) => {
-                if( index === questionIdx) {
-                    item.userAnswerIdx = answerIdx
+                if( index === questionIdx) {                    
                     item.options.map( (option, oIdx) => {
                         if( oIdx === answerIdx) {
                             option.isChecked = !option.isChecked
@@ -78,6 +77,7 @@ const App = () => {
                         }
 
                     })
+                    item.userAnswerIdx = item.options.findIndex( i => i.isChecked)
                 }
                 return {
                     ...item
@@ -91,9 +91,11 @@ const App = () => {
         })
     }
     
-    // useEffect( () => {
-    //     console.log('update questions', questions)
-    // }, [questions] )
+    useEffect( () => {
+        if(questions.data && questions.data[0].userAnswerIdx){
+            console.log('update questions', questions.data[0].userAnswerIdx)
+        }
+    }, [questions] )
 
     function checkAnswers(){
         console.log('check answers...')
