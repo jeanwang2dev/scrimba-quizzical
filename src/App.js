@@ -5,7 +5,7 @@ import Questions from './components/Questions'
 import Results from './components/Results'
 
 const App = () => {
-    const [quizState, setQuizState] = useState({isStart: false, isAnswered: false, isChecked: false })
+    const [quizState, setQuizState] = useState({isStart: false, isAnswered: false, isAnswerNotComplete: false})
     const [questions, setQuestions] = useState({loading: true, data: null})
 
     function startQuiz(){
@@ -20,8 +20,8 @@ const App = () => {
             .then(data => {
                 //console.log(data)
                 setQuestions({
-                loading: false,
-                data: data.results.map( (item, index ) =>{
+                    loading: false,
+                    data: data.results.map( (item, index ) =>{
 
                     const options = item.incorrect_answers
                     options.push(item.correct_answer)
@@ -63,7 +63,7 @@ const App = () => {
     }
 
     function answer(questionIdx, answerIdx) {
-        // console.log('user is answering: ' + questionIdx + " " + answerIdx)
+        
         setQuestions(prevQuestions => {
             const updatedData = prevQuestions.data.map( (item, index) => {
                 if( index === questionIdx) {                    
@@ -98,22 +98,34 @@ const App = () => {
         })
     }
     
-    useEffect( () => {
-        // if(questions.data && questions.data[0].userAnswerIdx){
-        //     console.log('update questions', questions.data[0].userAnswerIdx)
-        // }
-        console.log(questions)
-    }, [questions] )
+    // useEffect( () => {
+    //     // if(questions.data && questions.data[0].userAnswerIdx){
+    //     //     console.log('update questions', questions.data[0].userAnswerIdx)
+    //     // }
+    //     console.log(questions)
+    // }, [questions] )
 
     function checkAnswers(){
         console.log('check answers...')
-        setQuizState(prevQuizState => ({
-            ...quizState,
-            isAnswered: true,
-            isChecked: true
-        }))
-
         // check if all the question are anwsered
+        const result = questions.data.find( item => {
+            return item.userAnswerIdx === -1
+        })
+
+        if( result !== undefined) {
+            console.log('you have not answered all the quesitons')
+            setQuizState(prevQuizState => ({
+                ...quizState,
+                isAnswerNotComplete: true,
+            }))
+        } else {
+            setQuizState(prevQuizState => ({
+                ...quizState,
+                isAnswered: true,
+                isAnswerNotComplete: false,
+            }))
+        }
+        
     }
 
     function restartQuiz(){
@@ -121,17 +133,21 @@ const App = () => {
             ...quizState,
             isStart: false,
             isAnswered: false,
-            isChecked: false
         }))
     }
 
     return (
         <main className="max-w-5xl mx-auto text-center py-52">
+            { quizState.isStart &&
+                quizState.isAnswerNotComplete &&
+                <p className="mb-4 text-red-300">Please answer all the questions.</p>
+            }
             { !quizState.isStart && 
               <Start startQuiz={startQuiz}/> }
             { quizState.isStart && 
                 !quizState.isAnswered && 
                 <Questions answerAction={answer} questions={questions} checkAnswers={checkAnswers} />}
+
             { quizState.isStart && 
                 quizState.isAnswered && 
                 <Results restartQuiz={restartQuiz} questions={questions} />}

@@ -4,7 +4,7 @@ import Answer from './Answer'
 
 function Question(props){
 
-    console.log("question props: ", props)
+    // console.log("question props: ", props)
 
     let options
 
