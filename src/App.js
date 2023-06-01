@@ -138,7 +138,7 @@ const App = () => {
     }
 
     return (
-        <main className="max-w-5xl mx-auto text-center py-52">
+        <main className="container max-w-5xl mx-auto text-center py-36">
             { quizState.isStart &&
                 quizState.isAnswerNotComplete &&
                 <p className="mb-4 text-red-300">Please answer all the questions.</p>

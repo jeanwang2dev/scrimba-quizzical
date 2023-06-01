@@ -38,9 +38,9 @@ function Question(props){
     
 
     return (
-        <div className="w-3/4 text-left">
+        <div className="w-3/4 text-left sm:w-11/12">
             <h3 className="font-karla text-primary font-bold text-base leading-5 mb-5">{decode(props.question)}</h3>
-            <ul className="flex justify-start space-x-4">
+            <ul className="flex justify-start space-x-4 sm:space-x-1 sm:justify-between">
                 {options}
             </ul>
             
