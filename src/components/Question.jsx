@@ -16,7 +16,8 @@ function Question(props){
                     id={key} 
                     questionIdx={props.questionIdx} 
                     answerChoice={item.option}
-                    isChecked={item.isChecked}
+                    correctAnswerIdx={props.correctAnswerIdx}
+                    userAnswerIdx={props.userAnswerIdx}
                 />
             )
         })
@@ -35,10 +36,6 @@ function Question(props){
         })
     }
     
-
-
-
-    // const content = props.isCheckedMode ? options : 
 
     return (
         <div className="w-3/4 text-left">

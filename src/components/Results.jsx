@@ -10,6 +10,8 @@ function Results(props) {
                 questionIdx={item.questionIdx}
                 question={item.question}
                 options={item.options}
+                correctAnswerIdx={item.correctAnswerIdx}
+                userAnswerIdx={item.userAnswerIdx}
                 isCheckedMode={true}
             />
         )

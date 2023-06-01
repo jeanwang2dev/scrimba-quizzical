@@ -6,7 +6,7 @@ function Questions(props) {
     let loadingText
     let questions
     if(props.questions.loading) {
-        loadingText = "Loading"
+        loadingText = "Loading..."
     } else {
         questions = props.questions.data.map( item => {
             return (

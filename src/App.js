@@ -43,7 +43,8 @@ const App = () => {
                         questionIdx: index,
                         options: optionsWithState,
                         correctAnswerIdx: correctAnswerIdx,
-                        userAnswerIdx: -1 
+                        userAnswerIdx: -1,
+                        isCorrect: false
                     }
                 })
             })})
@@ -79,6 +80,13 @@ const App = () => {
                     })
                     item.userAnswerIdx = item.options.findIndex( i => i.isChecked)
                 }
+                
+                if(item.userAnswerIdx === item.correctAnswerIdx) {
+                    item.isCorrect = true
+                } else {
+                    item.isCorrect = false
+                }
+                
                 return {
                     ...item
                 }
