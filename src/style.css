@@ -22,10 +22,10 @@
 @layer components {
 
     .option-btn {
-        @apply transition-all px-3 py-1 border border-primary rounded-xl mb-4 text-[10.24px] font-inter font-medium hover:bg-tertiary hover:text-primary hover:tracking-wider hover:border-0 hover:cursor-pointer sm:px-1;
+        @apply transition-all px-3 py-1 border border-primary rounded-xl mb-4 text-[10.24px] font-inter font-medium hover:bg-tertiary hover:text-primary hover:tracking-wider hover:border-0 hover:cursor-pointer sm:px-0.5 sm:text-[9px];
     }
 
     .answer-btn {
-        @apply transition-all px-3 py-1 border border-primary rounded-xl mb-4 text-[10.24px] font-inter font-medium sm:px-1;
+        @apply transition-all px-3 py-1 border border-primary rounded-xl mb-4 text-[10.24px] font-inter font-medium sm:px-0.5 sm:text-[9x];
     }
 }    
