@@ -10,7 +10,7 @@ const App = () => {
 
     function startQuiz(){
         console.log('start...')
-        const url = "https://opentdb.com/api.php?amount=5&type=multiple"
+        const url = "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium&type=multiple"
         setQuizState(prevQuizState => ({
             ...quizState,
             isStart: true
@@ -134,6 +134,7 @@ const App = () => {
             isStart: false,
             isAnswered: false,
         }))
+        setQuestions({loading: true, data: null})
     }
 
     return (

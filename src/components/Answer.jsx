@@ -6,7 +6,7 @@ function Answer(props) {
         opacity: 0.5
     };
 
-    if(props.correctAnswerIdx === props.id && props.userAnswerIdx === props.id){
+    if(props.correctAnswerIdx === props.id ){
         answerStyle = {
             backgroundColor: "#94D7A2",
             border: 0
