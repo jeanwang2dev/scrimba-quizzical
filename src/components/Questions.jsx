@@ -23,7 +23,7 @@ function Questions(props) {
     }
 
     return (
-        <div className="flex flex-col items-center space-y-6 sm:border-2">
+        <div className="flex flex-col items-center space-y-6">
             { loadingText && <p>{loadingText}</p>}
             { !props.questions.loading && questions }
             <Button btnAction={props.checkAnswers}  btnText="Check answers" /> 
